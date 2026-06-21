@@ -1,0 +1,7 @@
+{
+  "repo_type": "module",
+  "name": "dephy_module_golden_sample",
+  "module_kind": "golden_sample",
+  "product_dependency_allowed": true
+}
+

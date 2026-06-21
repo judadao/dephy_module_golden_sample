@@ -1,0 +1,10 @@
+menu "Dephy Module Golden Sample"
+
+config DEPHY_MODULE_GOLDEN_SAMPLE
+	bool "Enable Dephy module golden sample"
+	default n
+	help
+	  Enable the reusable Dephy module golden sample.
+
+endmenu
+

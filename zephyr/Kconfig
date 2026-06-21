@@ -1,0 +1,17 @@
+menuconfig DEPHY_MODULE_GOLDEN_SAMPLE
+	bool "Dephy module golden sample"
+	default n
+	help
+	  Enable the reusable Dephy module golden sample.
+
+if DEPHY_MODULE_GOLDEN_SAMPLE
+
+config DEPHY_MODULE_GOLDEN_SAMPLE_STANDALONE
+	bool "Build standalone sample main"
+	default n
+	help
+	  Compile the sample module's demonstration main(). Product apps should
+	  leave this disabled and call the public API from their own main.
+
+endif
+

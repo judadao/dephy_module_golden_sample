@@ -1,0 +1,30 @@
+CC      ?= gcc
+AR      ?= ar
+CFLAGS  ?= -Wall -Wextra -std=c11 -g
+OUTDIR  ?= build_out
+
+LIB := $(OUTDIR)/libdephy_module_golden_sample.a
+OBJS := $(OUTDIR)/src/sample.o
+
+.PHONY: all test clean
+
+all: $(LIB)
+
+$(OUTDIR):
+	mkdir -p $(OUTDIR)/src
+
+$(OUTDIR)/src/sample.o: src/sample.c include/dephy_module_golden_sample/sample.h | $(OUTDIR)
+	$(CC) $(CFLAGS) -Iinclude -c $< -o $@
+
+$(LIB): $(OBJS)
+	$(AR) rcs $@ $^
+
+$(OUTDIR)/unit_sample: tests/unit_sample.c src/sample.c include/dephy_module_golden_sample/sample.h | $(OUTDIR)
+	$(CC) $(CFLAGS) -Iinclude tests/unit_sample.c src/sample.c -o $@
+
+test: $(OUTDIR)/unit_sample
+	$(OUTDIR)/unit_sample
+
+clean:
+	rm -rf $(OUTDIR)
+

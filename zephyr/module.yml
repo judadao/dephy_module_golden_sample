@@ -1,0 +1,5 @@
+name: dephy_module_golden_sample
+build:
+  cmake: zephyr
+  kconfig: zephyr/Kconfig
+
