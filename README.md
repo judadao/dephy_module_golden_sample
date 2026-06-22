@@ -1,67 +1,58 @@
 # dephy_module_golden_sample
 
-Golden sample repository for reusable Dephy modules.
+Golden sample for reusable C/Zephyr Dephy modules.
 
-This repo demonstrates the expected shape of a module that can be consumed by
-product repositories through `deps.json` and Zephyr `ZEPHYR_EXTRA_MODULES`.
+Use this repo as the structure contract for module repos that products consume
+through `deps.json` and Zephyr `ZEPHYR_EXTRA_MODULES`.
 
-## Layout
+## Contract
+
+A reusable C/Zephyr module should carry:
 
 ```text
-dephy_module_golden_sample/
-├── include/dephy_module_golden_sample/
-│   └── sample.h
-├── src/
-│   ├── sample.c
-│   └── main.c
-├── zephyr/
-│   ├── CMakeLists.txt
-│   ├── Kconfig
-│   └── module.yml
-├── tests/
-│   └── unit_sample.c
-├── scripts/
-│   └── test_zephyr_module.sh
-├── CMakeLists.txt
-├── Kconfig
-├── Makefile.linux
-├── VERSION
-└── repo.json
+repo.json
+AGENTS.md
+README.md
+VERSION
+docs/todo.yaml
+docs/module_structure.md
+include/<module_name>/*.h
+src/*.c
+tests/unit_*.c
+scripts/test_*.sh
+Makefile.linux
+CMakeLists.txt
+Kconfig
+zephyr/CMakeLists.txt
+zephyr/Kconfig
+zephyr/module.yml
 ```
 
-## Module Contract
+## Commands
 
-- `repo.json` marks this repo as `repo_type: module`.
-- Public headers are stable and live under `include/<module_name>/`.
-- Portable logic stays in `src/` and does not depend on product code.
-- Zephyr metadata lives under `zephyr/`.
-- Product repositories may pin this module in `deps.json`.
-
-## Linux Build And Test
-
-```bash
-make -f Makefile.linux
+```sh
 make -f Makefile.linux test
+scripts/audit_module_structure.sh ../dephy_industrial_io ../modbus_zephyr_esp32 ../mqtt_min_broker
 ```
 
-## Zephyr Module Use
+`make -f Makefile.linux test` builds the sample unit test and audits this repo's
+own structure. `scripts/audit_module_structure.sh` checks real module repos for
+drift from the golden contract.
 
-Add this repository to `ZEPHYR_EXTRA_MODULES`, then enable:
+## Module Use
+
+Add this repository to `ZEPHYR_EXTRA_MODULES`, enable:
 
 ```conf
 CONFIG_DEPHY_MODULE_GOLDEN_SAMPLE=y
 ```
 
-An embedding app can then call:
+Then include:
 
 ```c
 #include <dephy_module_golden_sample/sample.h>
-
-dephy_sample_config_t cfg = {
-    .device_id = "product-node",
-};
-
-dephy_sample_init(&cfg);
-dephy_sample_start();
 ```
 
+## TODO
+
+TODO state is tracked in `docs/todo.yaml` and summarized in `docs/todo.md`.
