@@ -4,35 +4,56 @@ Golden sample for reusable C/Zephyr Dephy modules.
 
 ## Overview
 
-This repo is the reference shape for reusable modules. Use it to start a new
-module or audit existing modules for layout drift.
+This repo is the executable reference for reusable module structure. Use it to
+start a new module or audit real modules for missing public API, source, tests,
+Zephyr metadata, docs, or TODO files.
 
 ## Key Value
 
-- One expected structure for module repos.
-- Public API, portable source, tests, Zephyr metadata, docs, and TODO examples.
-- Audit script for real module repos.
-- Clear boundary between reusable modules and product apps.
+- Defines the expected reusable C/Zephyr module contract.
+- Includes a minimal public API, portable C source, Linux unit test, and Zephyr
+  metadata.
+- Provides `scripts/audit_module_structure.sh` to check real module repos.
+- Keeps product-specific workflow out of reusable module repos.
 
 ## How To Use
 
 ```sh
 make -f Makefile.linux test
 scripts/audit_module_structure.sh ../dephy_industrial_io ../modbus_zephyr_esp32 ../mqtt_min_broker
+scripts/test_zephyr_module.sh --metadata-only
 ```
 
-For Zephyr:
+## Architecture Flow
 
-```conf
-CONFIG_DEPHY_MODULE_GOLDEN_SAMPLE=y
+```mermaid
+flowchart LR
+    Golden[Golden sample contract] --> Audit[audit_module_structure.sh]
+    Audit --> Module[Target module repo]
+    Module --> Include[include/*.h]
+    Module --> Src[src/*.c]
+    Module --> Tests[tests/unit_*.c]
+    Module --> Zephyr[zephyr/module.yml + Kconfig]
+```
+
+## Example User Scenario
+
+```mermaid
+flowchart TD
+    A[Create or refactor module] --> B[Follow golden layout]
+    B --> C[Add public header and source]
+    C --> D[Add Linux unit test]
+    D --> E[Add Zephyr metadata]
+    E --> F[Run audit script]
+    F --> G[Product can pin module]
 ```
 
 ## Simple Principle
 
-A reusable module should be buildable and testable on its own before a product
-pins it.
+A reusable module should be buildable, testable, and auditable before any
+product depends on it.
 
 ## Docs
 
-- `docs/module_structure.md`: full sample contract.
+- `docs/module_structure.md`: full reusable module contract.
 - `docs/todo.md`: current TODO summary.
