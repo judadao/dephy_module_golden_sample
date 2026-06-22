@@ -57,3 +57,8 @@ product depends on it.
 
 - `docs/module_structure.md`: full reusable module contract.
 - `docs/todo.md`: current TODO summary.
+
+## License
+
+MIT. See `LICENSE` and `NOTICE.md`. Reuse and references are allowed, but the
+copyright notice and attribution to Judd (judadao) must be preserved.
