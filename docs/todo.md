@@ -1,23 +1,17 @@
-# Module Golden Sample TODO
+# TODO
 
-Tracks work for the reusable module repository template.
+Source of truth: `docs/todo.yaml`. Update YAML before starting or completing work.
 
-## Repo Identity
+## repo
 
-- [x] Add `repo.json` so the template is machine-recognizable as
-      `repo_type: module`.
-- [x] Document that product repositories may pin this module in `deps.json`.
+- [x] Add docs/todo.yaml to make the module golden sample globally trackable.
+- [x] Keep repo.json machine-recognizable as repo_type module.
 
-## Module Structure
+## structure
 
-- [x] Add public headers under `include/dephy_module_golden_sample/`.
-- [x] Add portable implementation under `src/`.
-- [x] Add Zephyr module metadata under `zephyr/`.
-- [x] Add Linux unit test coverage under `tests/`.
-- [x] Add a Linux `Makefile.linux`.
-- [x] Add a Zephyr module metadata smoke script.
+- [x] Keep public headers, src, Zephyr metadata, Linux tests, and Makefile.linux in the sample.
 
-## Validation
+## validation
 
-- [x] Run `make -f Makefile.linux test`.
-- [x] Run `scripts/test_zephyr_module.sh --metadata-only`.
+- [x] Keep Linux unit and Zephyr metadata smoke commands documented and passing.
+- [ ] Add a script that reports drift between the golden sample and real module repos.
