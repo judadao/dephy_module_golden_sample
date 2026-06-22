@@ -2,12 +2,35 @@
 
 Golden sample for reusable C/Zephyr Dephy modules.
 
-Use this repo as the structure contract for module repos that products consume
-through `deps.json` and Zephyr `ZEPHYR_EXTRA_MODULES`.
+This repo defines the expected shape of a reusable module. It is both an example
+and an audit target: module repos can compare themselves against this structure
+to avoid drifting into product-specific layout or missing test/doc metadata.
+
+## Why This Exists
+
+- New modules need a repeatable starting point.
+- Existing modules need an objective structure check.
+- Product repos should be able to consume modules through the same dependency
+  and Zephyr conventions.
+- AI and humans need one compact reference for where files should live.
+
+## Normal Flow
+
+1. Start a reusable module from this layout.
+2. Put public APIs in `include/<module_name>/`.
+3. Put portable implementation in `src/`.
+4. Add Linux tests and Zephyr metadata before product integration.
+5. Run the audit script against real modules when refactoring.
+
+## How It Works
+
+The golden sample carries a minimal public API, implementation, Linux unit test,
+Zephyr metadata, TODO file, and structure documentation. The audit script checks
+whether target module repos contain the expected contract files and reports
+drift. The goal is not to force identical business logic; it is to keep the
+module boundary predictable.
 
 ## Contract
-
-A reusable C/Zephyr module should carry:
 
 ```text
 repo.json
@@ -34,10 +57,6 @@ zephyr/module.yml
 make -f Makefile.linux test
 scripts/audit_module_structure.sh ../dephy_industrial_io ../modbus_zephyr_esp32 ../mqtt_min_broker
 ```
-
-`make -f Makefile.linux test` builds the sample unit test and audits this repo's
-own structure. `scripts/audit_module_structure.sh` checks real module repos for
-drift from the golden contract.
 
 ## Module Use
 
