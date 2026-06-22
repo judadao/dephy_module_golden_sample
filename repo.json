@@ -1,7 +1,7 @@
 {
   "repo_type": "module",
   "name": "dephy_module_golden_sample",
-  "description": "Executable golden sample and audit contract for reusable C/Zephyr Dephy modules.",
+  "description": "Golden sample for reusable Dephy modules, with the expected C/Zephyr layout, metadata, tests, docs, and structure audit contract.",
   "module_kind": "golden_sample",
   "product_dependency_allowed": true,
   "license": "MIT",
@@ -11,6 +11,8 @@
     "golden-sample",
     "zephyr-module",
     "c11",
-    "repository-template"
+    "repository-template",
+    "module-template",
+    "quality-gate"
   ]
 }
