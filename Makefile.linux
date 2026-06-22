@@ -6,7 +6,7 @@ OUTDIR  ?= build_out
 LIB := $(OUTDIR)/libdephy_module_golden_sample.a
 OBJS := $(OUTDIR)/src/sample.o
 
-.PHONY: all test clean
+.PHONY: all structure-audit test clean
 
 all: $(LIB)
 
@@ -22,9 +22,11 @@ $(LIB): $(OBJS)
 $(OUTDIR)/unit_sample: tests/unit_sample.c src/sample.c include/dephy_module_golden_sample/sample.h | $(OUTDIR)
 	$(CC) $(CFLAGS) -Iinclude tests/unit_sample.c src/sample.c -o $@
 
-test: $(OUTDIR)/unit_sample
+structure-audit:
+	./scripts/audit_module_structure.sh .
+
+test: $(OUTDIR)/unit_sample structure-audit
 	$(OUTDIR)/unit_sample
 
 clean:
 	rm -rf $(OUTDIR)
-

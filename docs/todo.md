@@ -10,8 +10,9 @@ Source of truth: `docs/todo.yaml`. Update YAML before starting or completing wor
 ## structure
 
 - [x] Keep public headers, src, Zephyr metadata, Linux tests, and Makefile.linux in the sample.
+- [x] Define the reusable C/Zephyr module golden structure as an executable audit contract.
 
 ## validation
 
 - [x] Keep Linux unit and Zephyr metadata smoke commands documented and passing.
-- [ ] Add a script that reports drift between the golden sample and real module repos.
+- [x] Add a script that reports drift between the golden sample and real module repos.

@@ -17,7 +17,8 @@ items:
   status: done
 - id: module-structure
   area: structure
-  title: Keep public headers, src, Zephyr metadata, Linux tests, and Makefile.linux in the sample.
+  title: Keep public headers, src, Zephyr metadata, Linux tests, and Makefile.linux
+    in the sample.
   status: done
 - id: validation-commands
   area: validation
@@ -25,5 +26,14 @@ items:
   status: done
 - id: template-drift-check
   area: validation
-  title: Add a script that reports drift between the golden sample and real module repos.
-  status: todo
+  title: Add a script that reports drift between the golden sample and real module
+    repos.
+  status: done
+  notes: Added scripts/audit_module_structure.sh and wired it into Makefile.linux
+    test.
+- id: golden-structure-contract
+  area: structure
+  title: Define the reusable C/Zephyr module golden structure as an executable audit
+    contract.
+  status: done
+  notes: Documented and automated the reusable C/Zephyr module structure contract.
