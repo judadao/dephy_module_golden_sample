@@ -6,7 +6,13 @@ This repo defines the expected shape of a reusable module. It is both an example
 and an audit target: module repos can compare themselves against this structure
 to avoid drifting into product-specific layout or missing test/doc metadata.
 
-## Why This Exists
+## Overview
+
+Use this repo as the reference shape for reusable modules. It shows what files a
+module should carry, how Linux tests and Zephyr metadata fit together, and how
+to audit real module repos for structure drift.
+
+## Key Value
 
 - New modules need a repeatable starting point.
 - Existing modules need an objective structure check.
@@ -14,7 +20,7 @@ to avoid drifting into product-specific layout or missing test/doc metadata.
   and Zephyr conventions.
 - AI and humans need one compact reference for where files should live.
 
-## Normal Flow
+## How To Use
 
 1. Start a reusable module from this layout.
 2. Put public APIs in `include/<module_name>/`.
