@@ -6,7 +6,7 @@ OUTDIR  ?= build_out
 LIB := $(OUTDIR)/libdephy_module_golden_sample.a
 OBJS := $(OUTDIR)/src/sample.o
 
-.PHONY: all structure-audit test clean
+.PHONY: all structure-audit direct-test test testkit-test testkit-zephyr-metadata clean
 
 all: $(LIB)
 
@@ -25,8 +25,18 @@ $(OUTDIR)/unit_sample: tests/unit_sample.c src/sample.c include/dephy_module_gol
 structure-audit:
 	./scripts/audit_module_structure.sh .
 
-test: $(OUTDIR)/unit_sample structure-audit
+direct-test: $(OUTDIR)/unit_sample structure-audit
 	$(OUTDIR)/unit_sample
+
+test: testkit-test testkit-zephyr-metadata
+
+testkit-test:
+	@./scripts/trigger_testkit.sh dephy_module_golden_sample_linux \
+	    $(MAKE) -f Makefile.linux direct-test
+
+testkit-zephyr-metadata:
+	@./scripts/trigger_testkit.sh dephy_module_golden_sample_zephyr_metadata \
+	    ./scripts/test_zephyr_module.sh --metadata-only
 
 clean:
 	rm -rf $(OUTDIR)

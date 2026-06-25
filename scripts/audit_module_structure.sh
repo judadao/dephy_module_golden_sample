@@ -41,6 +41,7 @@ check_repo() {
     check_path "$repo" CMakeLists.txt
     check_path "$repo" Kconfig
     check_path "$repo" Makefile.linux
+    check_path "$repo" scripts/trigger_testkit.sh
     check_path "$repo" docs/todo.yaml
     check_path "$repo" docs/module_structure.md
     check_path "$repo" zephyr/CMakeLists.txt

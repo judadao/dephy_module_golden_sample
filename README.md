@@ -53,6 +53,27 @@ flowchart TD
 A reusable module should be buildable, testable, and auditable before any
 product depends on it.
 
+## Systematic Regression Testing
+
+From the workspace root, run the shared pytest regression module:
+
+```sh
+../dephy_testkit/.venv/bin/python -m pytest ../dephy_testkit/tests/regression --module dephy_module_golden_sample
+../dephy_testkit/.venv/bin/python -m pytest ../dephy_testkit/tests/regression --module dephy_module_golden_sample --profile integration
+```
+
+The local repo test remains:
+
+```sh
+make -f Makefile.linux test
+```
+
+`make -f Makefile.linux test` is the canonical local entry point and must
+trigger suites through `dephy_testkit` via `scripts/trigger_testkit.sh`. Keep
+direct targets such as `direct-test` available for debugging, but route default
+and CI-style runs through `testkit-*` wrappers. When a test case or script
+changes, update both the direct Makefile target and the testkit wrapper.
+
 ## Docs
 
 - `docs/module_structure.md`: full reusable module contract.
